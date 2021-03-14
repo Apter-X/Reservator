@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -7,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Reservator.Models
 {
-    [Table("Reservations")]
     public class Reservation
     {
         [Key]
@@ -16,11 +16,10 @@ namespace Reservator.Models
         [Required(ErrorMessage = "Date required!")]
         public DateTime Date { get; set; }
 
-        [System.AttributeUsage(System.AttributeTargets.Field | System.AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-        public sealed class TimestampAttribute : Attribute
-        {
-            public DateTime Timestamp { get; set; }
-        }
-        
+        [DefaultValue(false)]
+        public bool isValidate { get; set; }
+
+        [Timestamp]
+        public byte[] RowID { get; set; }
     }
 }
