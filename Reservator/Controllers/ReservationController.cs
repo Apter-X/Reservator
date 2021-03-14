@@ -22,10 +22,17 @@ namespace Reservator.Controllers
             return View();
         }
 
-        public IActionResult Check()
+        public IActionResult Check(DateTime searchDate)
         {
-            IEnumerable<Reservation> objList = _db.Reservations;
-            return View(objList);
+            var events = from e in _db.Reservations
+                         select e;
+
+            if (!String.IsNullOrEmpty(searchDate.ToLongTimeString()))
+            {
+                return View(events.Where(s => s.Date.CompareTo(searchDate) == 0));
+            }
+
+            return View();
         }
     }
 }
