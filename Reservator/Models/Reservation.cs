@@ -16,10 +16,10 @@ namespace Reservator.Models
         [Required(ErrorMessage = "Date required!")]
         public DateTime Date { get; set; }
 
-        [DefaultValue(false)]
-        public bool isValidate { get; set; }
+        [DefaultValue(0)]
+        public int Score { get; set; }
 
         [Timestamp]
-        public byte[] RowID { get; set; }
+        public byte[] Timestamp { get; set; }
     }
 }

@@ -16,10 +16,7 @@
                 @Html.DisplayNameFor(model => model.Date)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.isValidate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RowID)
+                @Html.DisplayNameFor(model => model.Score)
             </th>
             <th></th>
         </tr>
@@ -31,10 +28,7 @@
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.isValidate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RowID)
+                @Html.DisplayFor(modelItem => item.Score)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ReservationId">Edit</a>
