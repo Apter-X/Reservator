@@ -21,5 +21,11 @@ namespace Reservator.Models
 
         [Timestamp]
         public byte[] Timestamp { get; set; }
+
+        [ForeignKey("Session")]
+        public int SessID { get; set; }
+
+        //Navigation property
+        public Session Session { get; set; }
     }
 }
