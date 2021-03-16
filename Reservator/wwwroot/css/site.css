@@ -35,6 +35,13 @@ html {
   }
 }
 
+footer {
+    position: absolute;
+    height: 40px;
+    bottom: 0;
+    width: 100%;
+}
+
 .border-top {
   border-top: 1px solid #e5e5e5;
 }
@@ -51,7 +58,7 @@ button.accept-policy {
   line-height: inherit;
 }
 
-/* Sticky footer styles
+/* Searchbar
 -------------------------------------------------- */
 html {
   position: relative;
