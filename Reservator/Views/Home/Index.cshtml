@@ -2,7 +2,15 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <h1>Youcode Sessions</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec tincidunt tellus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus et eleifend sapien, vitae lobortis nisi. Aliquam convallis nisi libero, eget porttitor felis lobortis.</p>
+            <a asp-area="" asp-controller="Session" asp-action="Search" class="btn btn-primary">Search Session</a>
+        </div>
+        <div class="col">
+            <img class="img-fluid " src="~/img/landing-img.jpg" alt="landing image" />
+        </div>
+    </div>
 </div>
