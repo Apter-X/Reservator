@@ -16,10 +16,10 @@ var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
     type: 'pie',
     data: {
-        labels: ["Blue", "Red", "Yellow", "Green"],
+        labels: ["C#", "FB", "Java"],
         datasets: [{
-            data: [12.21, 15.58, 11.25, 8.32],
-            backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745'],
+            data: [12.21, 15.58, 11.25],
+            backgroundColor: ['#007bff', '#dc3545', '#ffc107'],
         }],
     },
 });
@@ -38,7 +38,7 @@ var myLineChart = new Chart(ctx, {
             label: "Revenue",
             backgroundColor: "rgba(2,117,216,1)",
             borderColor: "rgba(2,117,216,1)",
-            data: [4215, 5312, 6251, 7841, 9821, 14984],
+            data: [900, 884, 1192, 904, 809, 1203],
         }],
     },
     options: {
@@ -57,7 +57,7 @@ var myLineChart = new Chart(ctx, {
             yAxes: [{
                 ticks: {
                     min: 0,
-                    max: 15000,
+                    max: 1500,
                     maxTicksLimit: 5
                 },
                 gridLines: {
