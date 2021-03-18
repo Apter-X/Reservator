@@ -1,35 +1,23 @@
-﻿@model IEnumerable<Reservator.Models.Session>
+﻿@model Reservator.Models.Session
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>@ViewData["date"]</h1>
+<div class="s130">
+    <form asp-controller="Session" asp-action="Details">
+        <h3>@ViewData["Title"]</h3>
+        <div class="inner-form">
+            <div class="input-field first-wrap">
+                <div class="svg-wrapper">
+                    <img src="~/img/calendar.svg" width="24" height="24" viewBox="0 0 24 24">
+                </div>
+                <input type="date" name="date" asp-for="DateID" id="search" class="form-control" required />
+            </div>
+            <div class="input-field second-wrap">
+                <input type="submit" value="Check availability" class="btn-search">
+            </div>
+        </div>
+    </form>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.DateID)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateID)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.SessionID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.SessionID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.SessionID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>

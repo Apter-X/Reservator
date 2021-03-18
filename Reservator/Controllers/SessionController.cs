@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Reservator.Data;
 using System;
 using System.Collections.Generic;
@@ -16,22 +17,24 @@ namespace Reservator.Controllers
             _db = db;
         }
 
-        public IActionResult Index(DateTime searchDate)
-        {
-            var events = from e in _db.Reservations
-                         select e;
-
-            if (!String.IsNullOrEmpty(searchDate.ToLongTimeString()))
-            {
-                return View(events.Where(s => s.Date.CompareTo(searchDate) == 0));
-            }
-
-            return Search();
-        }
-
-        public IActionResult Search()
+        public IActionResult Index()
         {
             return View();
+        }
+
+        // GET: AdminPanel/Sessions/Details/5
+        public async Task<IActionResult> Details(string? date)
+        {
+            var session = await _db.Sessions
+                .Include(a => a.Reservations)
+                .FirstOrDefaultAsync(m => m.DateID == date);
+
+            if (session == null)
+            {
+                return Index();
+            }
+
+            return View(session);
         }
     }
 
