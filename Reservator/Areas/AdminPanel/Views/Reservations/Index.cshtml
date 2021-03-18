@@ -7,7 +7,8 @@
 <h1 class="mt-4">Reservations Panel</h1>
 
 <ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item active"><a asp-area="AdminPanel" asp-controller="Dashboard" asp-action="Index">Sessions</a></li>
+    <li class="breadcrumb-item active"><a asp-area="AdminPanel" asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="" asp-action="">Users</a></li>
     <li class="breadcrumb-item active"><a asp-area="AdminPanel" asp-controller="Sessions" asp-action="Index">Sessions</a></li>
     <li class="breadcrumb-item active"><a asp-area="AdminPanel" asp-controller="Reservations" asp-action="Index">Reservations</a></li>
 </ol>
@@ -28,7 +29,7 @@
                         <th>@Html.DisplayNameFor(model => model.Score)</th>
                         <th>@Html.DisplayNameFor(model => model.Timestamp)</th>
                         <th>@Html.DisplayNameFor(model => model.Session)</th>
-                        <th></th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tfoot>
@@ -37,6 +38,7 @@
                         <th>@Html.DisplayNameFor(model => model.Score)</th>
                         <th>@Html.DisplayNameFor(model => model.Timestamp)</th>
                         <th>@Html.DisplayNameFor(model => model.Session)</th>
+                        <th>Actions</th>
                     </tr>
                 </tfoot>
                 <tbody>
