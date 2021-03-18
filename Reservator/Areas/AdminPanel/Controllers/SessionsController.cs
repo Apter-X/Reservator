@@ -35,6 +35,7 @@ namespace Reservator.Areas.AdminPanel.Controllers
             }
 
             var session = await _context.Sessions
+                .Include(a => a.Reservations)
                 .FirstOrDefaultAsync(m => m.SessionID == id);
             if (session == null)
             {
