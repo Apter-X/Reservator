@@ -18,7 +18,7 @@ var myPieChart = new Chart(ctx, {
     data: {
         labels: ["In-progress", "Canceled", "Validated", "Refused"],
         datasets: [{
-            data: [12.21, 15.58, 11.25, 11.25],
+            data: [12.21, 7, 20, 1],
             backgroundColor: ['#007bff', '#ffc107', '#28a745 ', '#dc3545'],
         }],
     },
