@@ -16,10 +16,10 @@ var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
     type: 'pie',
     data: {
-        labels: ["C#", "FB", "Java"],
+        labels: ["In-progress", "Canceled", "Validated", "Refused"],
         datasets: [{
-            data: [12.21, 15.58, 11.25],
-            backgroundColor: ['#007bff', '#dc3545', '#ffc107'],
+            data: [12.21, 15.58, 11.25, 11.25],
+            backgroundColor: ['#007bff', '#ffc107', '#28a745 ', '#dc3545'],
         }],
     },
 });

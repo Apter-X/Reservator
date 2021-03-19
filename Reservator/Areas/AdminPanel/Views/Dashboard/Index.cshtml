@@ -3,17 +3,11 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 class="mt-4">Admin Panel</h1>
-<ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item active"><a asp-area="AdminPanel" asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
-    <li class="breadcrumb-item"><a asp-area="" asp-controller="" asp-action="">Users</a></li>
-    <li class="breadcrumb-item active"><a asp-area="AdminPanel" asp-controller="Sessions" asp-action="Index">Sessions</a></li>
-    <li class="breadcrumb-item active"><a asp-area="AdminPanel" asp-controller="Reservations" asp-action="Index">Reservations</a></li>
-</ol>
+<h1 class="mt-4">Dashboard</h1>
 <div class="row">
     <div class="col-xl-3 col-md-6">
         <div class="card bg-primary text-white mb-4">
-            <div class="card-body">Primary Card</div>
+            <div class="card-body">Reservations In-progress</div>
             <div class="card-footer d-flex align-items-center justify-content-between">
                 <a class="small text-white stretched-link" href="#">View Details</a>
                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -22,7 +16,7 @@
     </div>
     <div class="col-xl-3 col-md-6">
         <div class="card bg-warning text-white mb-4">
-            <div class="card-body">Warning Card</div>
+            <div class="card-body">Reservation Canceled</div>
             <div class="card-footer d-flex align-items-center justify-content-between">
                 <a class="small text-white stretched-link" href="#">View Details</a>
                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -31,7 +25,7 @@
     </div>
     <div class="col-xl-3 col-md-6">
         <div class="card bg-success text-white mb-4">
-            <div class="card-body">Success Card</div>
+            <div class="card-body">Reservations Validated</div>
             <div class="card-footer d-flex align-items-center justify-content-between">
                 <a class="small text-white stretched-link" href="#">View Details</a>
                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -40,7 +34,7 @@
     </div>
     <div class="col-xl-3 col-md-6">
         <div class="card bg-danger text-white mb-4">
-            <div class="card-body">Danger Card</div>
+            <div class="card-body">Reservations Refused</div>
             <div class="card-footer d-flex align-items-center justify-content-between">
                 <a class="small text-white stretched-link" href="#">View Details</a>
                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -53,7 +47,7 @@
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-chart-area mr-1"></i>
-                Area Chart Example
+                Pie Chart Reservations
             </div>
             <div class="card-body"><canvas id="myPieChart" width="100%" height="40"></canvas></div>
         </div>
@@ -62,7 +56,7 @@
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-chart-bar mr-1"></i>
-                Bar Chart Example
+                Bar Chart Reservations
             </div>
             <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
         </div>
