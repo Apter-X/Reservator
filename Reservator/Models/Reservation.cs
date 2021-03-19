@@ -13,7 +13,6 @@ namespace Reservator.Models
         [Key]
         public int ReservationId { get; set; }
 
-        [Required(ErrorMessage = "Date required!")]
         public DateTime Date { get; set; }
 
         [DefaultValue(0)]

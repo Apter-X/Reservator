@@ -11,11 +11,11 @@ namespace Reservator.Controllers
 {
     public class SessionController : Controller
     {
-        private readonly ApplicationDbContext _db;
+        private readonly ApplicationDbContext _context;
 
-        public SessionController(ApplicationDbContext db)
+        public SessionController(ApplicationDbContext context)
         {
-            _db = db;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -33,11 +33,11 @@ namespace Reservator.Controllers
                     DateID = date
                 };
 
-                _db.Add(s);
-                await _db.SaveChangesAsync();
+                _context.Add(s);
+                await _context.SaveChangesAsync();
             }
 
-            var session = await _db.Sessions
+            var session = await _context.Sessions
                 .Include(a => a.Reservations)
                 .FirstOrDefaultAsync(m => m.DateID == date);
 
@@ -46,7 +46,7 @@ namespace Reservator.Controllers
 
         private bool SessionExists(string date)
         {
-            return _db.Sessions.Any(e => e.DateID == date);
+            return _context.Sessions.Any(e => e.DateID == date);
         }
     }
 }

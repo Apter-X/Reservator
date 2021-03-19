@@ -25,9 +25,10 @@
         Reseravation Datatable
     </div>
     <div class="card-body">
-        <div class="mb-4 btn btn-primary">
-            <a class="text-white" asp-action="Create">Create New</a>
-        </div>
+        <form asp-controller="Reservation" asp-action="Create">
+            <input type="hidden" name="id" asp-for="SessionID" />
+            <input type="submit" value="Create Reservation" class="mb-4 btn btn-primary text-white" />
+        </form>
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
@@ -51,5 +52,5 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Return to Index</a>
 </div>

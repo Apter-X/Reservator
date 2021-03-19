@@ -11,6 +11,7 @@ namespace Reservator.Models
         [Key]
         public int SessionID { get; set; }
 
+        [Required]
         public string DateID { get; set; }
 
         //Navigation property
