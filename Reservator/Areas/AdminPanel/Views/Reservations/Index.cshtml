@@ -19,18 +19,18 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>@Html.DisplayNameFor(model => model.Date)</th>
+                        <th>@Html.DisplayNameFor(model => model.ReservationId)</th>
                         <th>@Html.DisplayNameFor(model => model.Score)</th>
-                        <th>@Html.DisplayNameFor(model => model.Timestamp)</th>
+                        <th>@Html.DisplayNameFor(model => model.Statement)</th>
                         <th>@Html.DisplayNameFor(model => model.Session)</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>@Html.DisplayNameFor(model => model.Date)</th>
+                        <th>@Html.DisplayNameFor(model => model.ReservationId)</th>
                         <th>@Html.DisplayNameFor(model => model.Score)</th>
-                        <th>@Html.DisplayNameFor(model => model.Timestamp)</th>
+                        <th>@Html.DisplayNameFor(model => model.Statement)</th>
                         <th>@Html.DisplayNameFor(model => model.Session)</th>
                         <th>Actions</th>
                     </tr>
@@ -38,17 +38,17 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>@Html.DisplayFor(modelItem => item.Date)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Score)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Timestamp)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Session.SessionID)</td>
-                            <td>
-                                <a asp-action="Edit" asp-route-id="@item.ReservationId">Edit</a> |
-                                <a asp-action="Details" asp-route-id="@item.ReservationId">Details</a> |
-                                <a asp-action="Delete" asp-route-id="@item.ReservationId">Delete</a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.ReservationId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Score)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Statement)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Session.SessionID)</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ReservationId">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.ReservationId">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.ReservationId">Delete</a>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>

@@ -17,31 +17,31 @@
     </dl>
 </div>
 
-
-
-        <div class="table-responsive">
-            <table class="table" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Timestamp</th>
-                        <th>Score</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.Reservations)
-                    {
-                        <tr>
-                            <td>@Html.DisplayFor(modelItem => item.Timestamp)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Score)</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        <form asp-controller="Reservation" asp-action="Create">
-            <input type="hidden" name="id" asp-for="SessionID" />
-            <input type="submit" value="Reserve" class="mb-4 btn btn-primary text-white" />
-        </form>
+<div class="table-responsive">
+    <table class="table" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Score</th>
+                <th>Statement</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Reservations)
+            {
+            <tr>
+                <td></td>
+                <td>@Html.DisplayFor(modelItem => item.Score)</td>
+                <td>@Html.DisplayFor(modelItem => item.Statement)</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<form asp-controller="Reservation" asp-action="Create">
+    <input type="hidden" name="id" asp-for="SessionID" />
+    <input type="submit" value="Reserve" class="mb-4 btn btn-primary text-white" />
+</form>
 
 
 <div>

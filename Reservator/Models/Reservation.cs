@@ -10,17 +10,21 @@ namespace Reservator.Models
 {
     public class Reservation
     {
+        [DisplayName("ID")]
         [Key]
         public int ReservationId { get; set; }
-
-        public DateTime Date { get; set; }
 
         [DefaultValue(0)]
         public int Score { get; set; }
 
-        [Timestamp]
-        public byte[] Timestamp { get; set; }
+        [DefaultValue("InProgress")]
+        public string Statement { get; set; }
 
+        [DisplayName("Timestamp")]
+        [Timestamp]
+        public byte[] RowID { get; set; }
+
+        [DisplayName("Parent ID")]
         [ForeignKey("Session")]
         public int SessID { get; set; }
 
