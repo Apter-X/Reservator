@@ -32,17 +32,17 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Timestamp</th>
                         <th>Score</th>
+                        <th>Statement</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model.Reservations)
                     {
-                        <tr>
-                            <td>@Html.DisplayFor(modelItem => item.Timestamp)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Score)</td>
-                        </tr>
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Score)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Statement)</td>
+                    </tr>
                     }
                 </tbody>
             </table>

@@ -26,7 +26,8 @@ namespace Reservator.Controllers
         {
             var s = new Reservation
             {
-                SessID = id
+                SessID = id,
+                Statement = "InProgress" // Default Value
             };
 
             _context.Add(s);

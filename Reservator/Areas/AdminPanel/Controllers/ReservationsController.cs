@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Reservator.Data;
 using Reservator.Models;
 
-namespace Reservator.AdminPanel.Controllers
+namespace Reservator.Areas.AdminPanel.Controllers
 {
     [Area("AdminPanel")]
     public class ReservationsController : Controller
@@ -20,14 +20,14 @@ namespace Reservator.AdminPanel.Controllers
             _context = context;
         }
 
-        // GET: Reservations
+        // GET: AdminPanel/Reservations
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Reservations.Include(r => r.Session);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Reservations/Details/5
+        // GET: AdminPanel/Reservations/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -46,19 +46,19 @@ namespace Reservator.AdminPanel.Controllers
             return View(reservation);
         }
 
-        // GET: Reservations/Create
+        // GET: AdminPanel/Reservations/Create
         public IActionResult Create()
         {
-            ViewData["SessID"] = new SelectList(_context.Sessions, "SessionID", "SessionID");
+            ViewData["SessID"] = new SelectList(_context.Sessions, "SessionID", "DateID");
             return View();
         }
 
-        // POST: Reservations/Create
+        // POST: AdminPanel/Reservations/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ReservationId,Date,Score,Timestamp,SessID")] Reservation reservation)
+        public async Task<IActionResult> Create([Bind("ReservationId,Score,Statement,RowID,SessID")] Reservation reservation)
         {
             if (ModelState.IsValid)
             {
@@ -66,11 +66,11 @@ namespace Reservator.AdminPanel.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SessID"] = new SelectList(_context.Sessions, "SessionID", "SessionID", reservation.SessID);
+            ViewData["SessID"] = new SelectList(_context.Sessions, "SessionID", "DateID", reservation.SessID);
             return View(reservation);
         }
 
-        // GET: Reservations/Edit/5
+        // GET: AdminPanel/Reservations/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -83,16 +83,26 @@ namespace Reservator.AdminPanel.Controllers
             {
                 return NotFound();
             }
-            ViewData["SessID"] = new SelectList(_context.Sessions, "SessionID", "SessionID", reservation.SessID);
+
+            List<string> States = new List<string>
+            {
+                "InProgress",
+                "Canceled",
+                "Confirmed",
+                "Refused"
+            };
+
+            ViewData["SessID"] = new SelectList(_context.Sessions, "SessionID", "DateID", reservation.SessID);
+            ViewData["States"] = new SelectList(States);
             return View(reservation);
         }
 
-        // POST: Reservations/Edit/5
+        // POST: AdminPanel/Reservations/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ReservationId,Date,Score,Timestamp,SessID")] Reservation reservation)
+        public async Task<IActionResult> Edit(int id, [Bind("ReservationId,Score,Statement,RowID,SessID")] Reservation reservation)
         {
             if (id != reservation.ReservationId)
             {
@@ -119,11 +129,11 @@ namespace Reservator.AdminPanel.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SessID"] = new SelectList(_context.Sessions, "SessionID", "SessionID", reservation.SessID);
+            ViewData["SessID"] = new SelectList(_context.Sessions, "SessionID", "DateID", reservation.SessID);
             return View(reservation);
         }
 
-        // GET: Reservations/Delete/5
+        // GET: AdminPanel/Reservations/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -142,7 +152,7 @@ namespace Reservator.AdminPanel.Controllers
             return View(reservation);
         }
 
-        // POST: Reservations/Delete/5
+        // POST: AdminPanel/Reservations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

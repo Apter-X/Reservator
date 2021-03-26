@@ -14,15 +14,16 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ReservationId" />
             <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" type="date" class="form-control" />
-                <span asp-validation-for="Date" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Score" class="control-label"></label>
                 <input asp-for="Score" class="form-control" />
                 <span asp-validation-for="Score" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Statement" class="control-label"></label>
+                <select asp-for="Statement" class="form-control" asp-items="ViewBag.States"></select>
+                <span asp-validation-for="Statement" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="RowID" />
             <div class="form-group">
                 <label asp-for="SessID" class="control-label"></label>
                 <select asp-for="SessID" class="form-control" asp-items="ViewBag.SessID"></select>
@@ -38,4 +39,3 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-

@@ -26,8 +26,10 @@ namespace Reservator.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                    b.Property<byte[]>("RowID")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
 
                     b.Property<int>("Score")
                         .HasColumnType("int");
@@ -35,10 +37,8 @@ namespace Reservator.Migrations
                     b.Property<int>("SessID")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("Timestamp")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
+                    b.Property<string>("Statement")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ReservationId");
 
@@ -55,6 +55,7 @@ namespace Reservator.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("DateID")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SessionID");
