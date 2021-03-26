@@ -24,8 +24,11 @@ namespace Reservator.Controllers
 
         public async Task<IActionResult> Create(int id)
         {
+            int rank = Ranker(1, 1);
+
             var s = new Reservation
             {
+                Score = rank,
                 SessID = id,
                 Statement = "InProgress" // Default Value
             };
@@ -34,6 +37,15 @@ namespace Reservator.Controllers
             await _context.SaveChangesAsync();
 
             return Index();
+        }
+
+        private int Ranker(int resRefused, int resAccepted)
+        {
+            int rank = 30;
+
+            rank += (resRefused * 10) - (resAccepted * 5);
+
+            return rank;
         }
     }
 }
