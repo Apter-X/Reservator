@@ -22,14 +22,15 @@ namespace Reservator.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Create(int id)
+        public async Task<IActionResult> Create(int sessId, string userId)
         {
             int rank = Ranker(1, 1);
 
             var s = new Reservation
             {
                 Score = rank,
-                SessID = id,
+                SessID = sessId,
+                UsrID = userId,
                 Statement = "InProgress" // Default Value
             };
 
