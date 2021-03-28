@@ -16,6 +16,9 @@ namespace Reservator.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
+                services.AddDefaultIdentity<UserInfo>(options => options.SignIn.RequireConfirmedAccount = false)
+                    .AddRoles <IdentityRole>()
+                    .AddEntityFrameworkStores<ApplicationDbContext>();
             });
         }
     }
