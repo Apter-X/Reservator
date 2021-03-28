@@ -55,9 +55,9 @@ namespace Reservator.Areas.Identity.Pages.Account
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
 
-            [Required]
+          /*  [Required]
             [Display(Name = "Class")]
-            public string Class { get; set; }
+            public string Class { get; set; }*/
 
             [Required]
             [EmailAddress]
