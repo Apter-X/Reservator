@@ -19,5 +19,7 @@ namespace Reservator.Data
         public DbSet<Session> Sessions { get; set; }
 
         public DbSet<Reservation> Reservations { get; set; }
+
+        public override DbSet<UserInfo> Users { get; set; }
     }
 }
