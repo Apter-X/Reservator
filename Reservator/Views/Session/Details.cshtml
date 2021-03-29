@@ -29,14 +29,16 @@
         </thead>
         <tbody>
             @{
-                int rank = 0;
+                int Rank = 0;
 
                 foreach (var item in Model.Reservations)
                 {
-                    rank += 1;
+                    Rank += 1;
+                    string Name = item.UserInfo.FirstName + " " + item.UserInfo.LastName;
+
                     <tr>
-                        <td>@rank</td>
-                        <td>@Html.DisplayFor(modelItem => item.UserInfo.LastName)</td>
+                        <td>@Rank</td>
+                        <td>@Name</td>
                         <td>@Html.DisplayFor(modelItem => item.Score)</td>
                         <td>@Html.DisplayFor(modelItem => item.Statement)</td>
                     </tr>
