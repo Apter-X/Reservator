@@ -20,7 +20,7 @@
                 <thead>
                     <tr>
                         <th>@Html.DisplayNameFor(model => model.ReservationId)</th>
-                        <th>@Html.DisplayNameFor(model => model.UserInfo.UserName)</th>
+                        <th>Name</th>
                         <th>@Html.DisplayNameFor(model => model.Score)</th>
                         <th>@Html.DisplayNameFor(model => model.Statement)</th>
                         <th>@Html.DisplayNameFor(model => model.Session)</th>
@@ -30,7 +30,7 @@
                 <tfoot>
                     <tr>
                         <th>@Html.DisplayNameFor(model => model.ReservationId)</th>
-                        <th>@Html.DisplayNameFor(model => model.UserInfo.UserName)</th>
+                        <th>Name</th>
                         <th>@Html.DisplayNameFor(model => model.Score)</th>
                         <th>@Html.DisplayNameFor(model => model.Statement)</th>
                         <th>@Html.DisplayNameFor(model => model.Session)</th>
@@ -40,9 +40,11 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
+                        string Name = item.UserInfo.FirstName + " " + item.UserInfo.LastName;
+
                     <tr>
                         <td>@Html.DisplayFor(modelItem => item.ReservationId)</td>
-                        <td>@Html.DisplayFor(modelItem => item.UserInfo.LastName)</td>
+                        <td>@Name</td>
                         <td>@Html.DisplayFor(modelItem => item.Score)</td>
                         <td>@Html.DisplayFor(modelItem => item.Statement)</td>
                         <td>@Html.DisplayFor(modelItem => item.Session.DateID)</td>
