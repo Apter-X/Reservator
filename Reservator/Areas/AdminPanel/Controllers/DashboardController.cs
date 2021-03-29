@@ -23,7 +23,7 @@ namespace Reservator.Areas.AdminPanel.Controllers
         {
             ViewData["In-progress"] = _context.Reservations.Where(c => c.Statement == "InProgress").Count();
             ViewData["Canceled"] = _context.Reservations.Where(c => c.Statement == "Canceled").Count();
-            ViewData["Validated"] = _context.Reservations.Where(c => c.Statement == "Validated").Count();
+            ViewData["Confirmed"] = _context.Reservations.Where(c => c.Statement == "Confirmed").Count();
             ViewData["Refused"] = _context.Reservations.Where(c => c.Statement == "Refused").Count();
 
             return View();
