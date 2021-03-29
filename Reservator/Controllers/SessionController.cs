@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Reservator.Data;
 using Reservator.Models;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Reservator.Controllers
 {
+    [Authorize]
     public class SessionController : Controller
     {
         private readonly ApplicationDbContext _context;
