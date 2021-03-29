@@ -25,7 +25,7 @@ namespace Reservator.Areas.AdminPanel.Controllers
         // GET: AdminPanel/Reservations
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Reservations.Include(r => r.Session);
+            var applicationDbContext = _context.Reservations.Include(r => r.Session).Include(u => u.UserInfo);
             return View(await applicationDbContext.ToListAsync());
         }
 

@@ -13,6 +13,6 @@ namespace Reservator.Models
         public string Class { get; set; }
 
         //Navigation property
-        public ICollection<Reservation> Reservations { get; set; }
+        public List<Reservation> Reservations { get; set; }
     }
 }

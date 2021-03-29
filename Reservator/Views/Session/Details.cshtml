@@ -36,7 +36,7 @@
                     rank += 1;
                     <tr>
                         <td>@rank</td>
-                        <td>@Html.DisplayFor(modelItem => item.UsrID)</td>
+                        <td>@Html.DisplayFor(modelItem => item.UserInfo.LastName)</td>
                         <td>@Html.DisplayFor(modelItem => item.Score)</td>
                         <td>@Html.DisplayFor(modelItem => item.Statement)</td>
                     </tr>
@@ -53,4 +53,5 @@
 
 <div>
     <a asp-action="Index">Return to Index</a>
+</div>rn to Index</a>
 </div>

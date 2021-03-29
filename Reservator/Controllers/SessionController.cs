@@ -40,8 +40,11 @@ namespace Reservator.Controllers
             }
 
             var session = await _context.Sessions
+                .Include(a => a.Reservations)
+                .ThenInclude(u => u.UserInfo)
                 .Include(a => a.Reservations.OrderByDescending(s => s.Score))
                 .FirstOrDefaultAsync(m => m.DateID == date);
+            
 
             return View(session);
         }
