@@ -36,7 +36,7 @@ namespace Reservator.Controllers
 
             if (check.Count() != 0)
             {
-                return RedirectToAction("Index", "Session");
+                return View("Exist");
             }
 
             int rank = Ranker(1, 1);
@@ -53,6 +53,11 @@ namespace Reservator.Controllers
             await _context.SaveChangesAsync();
 
             return Index();
+        }
+
+        public IActionResult Exist()
+        {
+            return View();
         }
 
         private int Ranker(int resRefused, int resAccepted)
