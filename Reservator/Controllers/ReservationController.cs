@@ -39,7 +39,9 @@ namespace Reservator.Controllers
                 return View("Exist");
             }
 
-            int rank = Ranker(1, 1);
+            var rand = new Random();
+
+            int rank = Ranker(rand.Next(10, 60), rand.Next(5, 30));
 
             var s = new Reservation
             {
