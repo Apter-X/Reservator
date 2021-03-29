@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Reservator.Data;
 using Reservator.Models;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Reservator.Controllers
 {
+    [Authorize]
     public class ReservationController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -29,6 +31,14 @@ namespace Reservator.Controllers
         public async Task<IActionResult> Create(int id)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var check = _context.Reservations.Where(c => c.UsrID == userId);
+
+            if (check.Count() != 0)
+            {
+                return RedirectToAction("Index", "Session");
+            }
+
             int rank = Ranker(1, 1);
 
             var s = new Reservation
