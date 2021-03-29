@@ -21,9 +21,10 @@ namespace Reservator.Areas.AdminPanel.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var applicationDbContext = _context.Users;
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: AdminPanel/Sessions/Details/5
