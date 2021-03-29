@@ -1,3 +1,13 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@using Reservator.Models
+
+@inject SignInManager<UserInfo> SignInManager
+@inject UserManager<UserInfo> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    Layout = "../../Areas/AdminPanel/_AdminLayout";
+} else
+{
     Layout = "_Layout";
 }

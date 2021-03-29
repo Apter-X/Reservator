@@ -30,5 +30,12 @@ namespace Reservator.Models
 
         //Navigation property
         public Session Session { get; set; }
+
+        [DisplayName("User ID")]
+        [ForeignKey("UserInfo")]
+        public string UsrID { get; set; }
+
+        //Navigation property
+        public UserInfo UserInfo { get; set; }
     }
 }

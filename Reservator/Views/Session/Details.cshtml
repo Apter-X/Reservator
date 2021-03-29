@@ -30,7 +30,7 @@
             @foreach (var item in Model.Reservations)
             {
             <tr>
-                <td></td>
+                <td>@Html.DisplayFor(modelItem => item.UsrID)</td>
                 <td>@Html.DisplayFor(modelItem => item.Score)</td>
                 <td>@Html.DisplayFor(modelItem => item.Statement)</td>
             </tr>
