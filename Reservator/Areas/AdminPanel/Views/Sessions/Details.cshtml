@@ -41,7 +41,7 @@
                     @foreach (var item in Model.Reservations)
                     {
                     <tr>
-                        <td>@Html.DisplayFor(modelItem => item.UsrID)</td>
+                        <td>@Html.DisplayFor(modelItem => item.UserInfo.LastName)</td>
                         <td>@Html.DisplayFor(modelItem => item.Score)</td>
                         <td>@Html.DisplayFor(modelItem => item.Statement)</td>
                     </tr>

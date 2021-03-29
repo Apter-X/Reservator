@@ -10,7 +10,7 @@ using Reservator.Data;
 namespace Reservator.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210329014817_init")]
+    [Migration("20210329025558_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

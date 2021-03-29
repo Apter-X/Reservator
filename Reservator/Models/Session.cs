@@ -15,6 +15,7 @@ namespace Reservator.Models
         public string DateID { get; set; }
 
         //Navigation property
+        
         public ICollection<Reservation> Reservations { get; set; }
     }
 }

@@ -41,7 +41,10 @@ namespace Reservator.Controllers
 
             var session = await _context.Sessions
                 .Include(a => a.Reservations)
+                .ThenInclude(u => u.UserInfo)
+                
                 .FirstOrDefaultAsync(m => m.DateID == date);
+            
 
             return View(session);
         }
