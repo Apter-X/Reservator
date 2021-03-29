@@ -21,10 +21,10 @@ namespace Reservator.Areas.AdminPanel.Controllers
 
         public IActionResult Index()
         {
-            ViewData["In-progress"] = 0;
-            ViewData["Canceled"] = 0;
-            ViewData["Validated"] = 0;
-            ViewData["Refused"] = 0;
+            ViewData["In-progress"] = _context.Reservations.Where(c => c.Statement == "InProgress").Count();
+            ViewData["Canceled"] = _context.Reservations.Where(c => c.Statement == "Canceled").Count();
+            ViewData["Validated"] = _context.Reservations.Where(c => c.Statement == "Validated").Count();
+            ViewData["Refused"] = _context.Reservations.Where(c => c.Statement == "Refused").Count();
 
             return View();
         }
