@@ -10,7 +10,7 @@ namespace Reservator.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Class { get; set; }
+       
 
         //Navigation property
         public ICollection<Reservation> Reservations { get; set; }
