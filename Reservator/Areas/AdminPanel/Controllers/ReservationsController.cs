@@ -52,7 +52,17 @@ namespace Reservator.Areas.AdminPanel.Controllers
         // GET: AdminPanel/Reservations/Create
         public IActionResult Create()
         {
+            List<string> States = new List<string>
+            {
+                "InProgress",
+                "Canceled",
+                "Confirmed",
+                "Refused"
+            };
+
             ViewData["SessID"] = new SelectList(_context.Sessions, "SessionID", "DateID");
+            ViewData["States"] = new SelectList(States);
+
             return View();
         }
 
@@ -69,6 +79,7 @@ namespace Reservator.Areas.AdminPanel.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            
             ViewData["SessID"] = new SelectList(_context.Sessions, "SessionID", "DateID", reservation.SessID);
             return View(reservation);
         }
