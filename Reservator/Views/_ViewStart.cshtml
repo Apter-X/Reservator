@@ -4,7 +4,7 @@
 @inject SignInManager<UserInfo> SignInManager
 @inject UserManager<UserInfo> UserManager
 
-@if (SignInManager.IsSignedIn(User))
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("admin"))
 {
     Layout = "../../Areas/AdminPanel/_AdminLayout";
 } else

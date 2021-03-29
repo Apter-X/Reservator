@@ -12,7 +12,7 @@ using Reservator.Models;
 namespace Reservator.Areas.AdminPanel.Controllers
 {
     [Area("AdminPanel")]
-    [Authorize]
+    [Authorize(Roles = "admin")]
     public class ReservationsController : Controller
     {
         private readonly ApplicationDbContext _context;
