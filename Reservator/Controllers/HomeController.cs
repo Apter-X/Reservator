@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Reservator.Models;
 using System;
@@ -13,13 +14,21 @@ namespace Reservator.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly SignInManager<UserInfo> _user;
+
+        public HomeController(ILogger<HomeController> logger, SignInManager<UserInfo> user)
         {
             _logger = logger;
+            _user = user;
         }
 
         public IActionResult Index()
         {
+            if (_user.IsSignedIn(User))
+            {
+                return RedirectToAction("Index", "Session");
+            }
+
             return View();
         }
 
