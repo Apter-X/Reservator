@@ -62,6 +62,7 @@ namespace Reservator.Areas.AdminPanel.Controllers
 
             ViewData["SessID"] = new SelectList(_context.Sessions, "SessionID", "DateID");
             ViewData["States"] = new SelectList(States);
+            ViewData["user"] = new SelectList(_context.Users, "Id","LastName");
 
             return View();
         }
@@ -71,7 +72,7 @@ namespace Reservator.Areas.AdminPanel.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ReservationId,Score,Statement,RowID,SessID")] Reservation reservation)
+        public async Task<IActionResult> Create([Bind("ReservationId,Score,Statement,RowID,SessID,UsrID")] Reservation reservation)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +81,9 @@ namespace Reservator.Areas.AdminPanel.Controllers
                 return RedirectToAction(nameof(Index));
             }
             
-            ViewData["SessID"] = new SelectList(_context.Sessions, "SessionID", "DateID", reservation.SessID);
+           /* ViewData["SessID"] = new SelectList(_context.Sessions, "SessionID", "DateID", reservation.SessID);
+            ViewData["user"] = new SelectList(_context.Users, "Id", "LastName", reservation.UsrID);*/
+
             return View(reservation);
         }
 
