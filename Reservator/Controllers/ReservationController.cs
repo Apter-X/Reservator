@@ -32,7 +32,7 @@ namespace Reservator.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var check = _context.Reservations.Where(c => c.UsrID == userId);
+            var check = _context.Reservations.Where(c => c.UsrID == userId).Where(d => d.SessID == id );
 
             if (check.Count() != 0)
             {
