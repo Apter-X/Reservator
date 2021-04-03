@@ -28,6 +28,13 @@ namespace Reservator.Controllers
         // GET: AdminPanel/Sessions/Details/5
         public async Task<IActionResult> Details(string date)
         {
+            DateTime selectedDate = DateTime.Parse(date);
+            DateTime currentDate = DateTime.Today;
+
+            if (selectedDate < currentDate)
+            {
+                return View("Invalid");
+            }
             if (!SessionExists(date))
             {
                 var s = new Session
