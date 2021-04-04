@@ -56,7 +56,7 @@ namespace Reservator.Controllers
             DateTime selectedDate = DateTime.Parse(date);
             DateTime currentDate = DateTime.Today;
             int currentHour = DateTime.Now.Hour;
-            if(currentHour >= 23 && selectedDate == currentDate)
+            if(currentHour >= 16 && selectedDate == currentDate)
             {
                 return View("Closed");
             }
