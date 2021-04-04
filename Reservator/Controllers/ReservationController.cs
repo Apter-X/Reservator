@@ -30,15 +30,19 @@ namespace Reservator.Controllers
 
         public async Task<IActionResult> Create(int id)
         {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            /*var check = _context.Reservations.Where(c => c.UsrID == userId).Where(d => d.SessID == id);
+            var check = _context.Reservations.Where(c => c.UsrID == userId).Where(d => d.SessID == id);
 
 
             if (check.Count() != 0)
             {
                 return View("Exist");
-            }*/
+            }
 
 
 
@@ -68,6 +72,7 @@ namespace Reservator.Controllers
 
         public IActionResult Exist()
         {
+
             return View();
         }
 

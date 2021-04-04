@@ -35,6 +35,7 @@ namespace Reservator.Areas.AdminPanel.Controllers
             {
                 return NotFound();
             }
+           
 
             var session = await _context.Sessions
                 .Include(a => a.Reservations)
@@ -50,70 +51,52 @@ namespace Reservator.Areas.AdminPanel.Controllers
         }
         public async Task<IActionResult> List(int? id)
         {
-
-
-
-
-            int counter = 0;
-            int count = _context.Reservations
-                                      .Where(r => r.SessID == id).Count();
-            while (counter < count)
+            if (id == null)
             {
-                if (counter < 30)
-                {
-                    var res = _context.Reservations
-                                       .Where(r => r.Statement == "InProgress")
-                                      .Where(r => r.SessID == id).OrderByDescending(s => s.Score).First();
-                    res.Statement = "Confirmed";
-                   
-
-                    counter++;
-                }
-                else
-                {
-                    var res = _context.Reservations
-                          .Where(r => r.Statement == "InProgress")
-          .Where(r => r.SessID == 17).First();
-                    res.Statement = "Refused";
-                    counter++;
-                }
-                _context.SaveChanges();
-                
+                return NotFound();
             }
-            
+            var session = await _context.Sessions
+              .Include(a => a.Reservations)
+              .ThenInclude(u => u.UserInfo)
+              .FirstOrDefaultAsync(m => m.SessionID == id);
 
-
-
-
-
-
-            /*   var session = _context.Sessions.Where(s => s.Date == date)
-                  .Include(a => a.Reservations.Where(r => r.Statement == "Confirmed"))
-                  .ThenInclude(u => u.UserInfo).ToList();*/
-
-
-            /*  .(y =>
-               {
-                   y.Statement = "Refused";
-
-               });*/
-
-            /*var reservetions = await _context.Reservations
-                                             .FirstOrDefaultAsync(m => m.SessID == id);
-
-
-
-            if (reservetions != null)
+            int data = _context.Reservations
+                   .Where(r => r.Statement == "InProgress")
+                   .Where(r => r.SessID == id).Count();
+            if(data > 0)
             {
-                foreach(var res in reservetions)
+                int counter = 0;
+                int count = _context.Reservations
+                                          .Where(r => r.SessID == id).Count();
+                while (counter < count)
                 {
-                    reservetions.Statement = "Confirmed";
-                    _context.SaveChanges();
-                }
-                
-            }*/
+                    if (counter < 30)
+                    {
+                        var res = _context.Reservations
+                                           .Where(r => r.Statement == "InProgress")
+                                          .Where(r => r.SessID == id).OrderByDescending(s => s.Score).First();
+                        res.Statement = "Confirmed";
 
-            return View();
+
+                        counter++;
+                    }
+                    else
+                    {
+                        var res = _context.Reservations
+                              .Where(r => r.Statement == "InProgress")
+              .Where(r => r.SessID == id).First();
+                        res.Statement = "Refused";
+                        counter++;
+                    }
+                    _context.SaveChanges();
+
+                }
+
+
+                return View("Details", session);
+            }
+            return View("Details",session);
+
         }
         // GET: AdminPanel/Sessions/Create
         public IActionResult Create()

@@ -49,8 +49,17 @@ namespace Reservator.Controllers
         // GET: AdminPanel/Sessions/Details/5
         public async Task<IActionResult> Details(string date)
         {
+            if (date== null)
+            {
+                return NotFound();
+            }
             DateTime selectedDate = DateTime.Parse(date);
             DateTime currentDate = DateTime.Today;
+            int currentHour = DateTime.Now.Hour;
+            if(currentHour == 16)
+            {
+                return View("Closed");
+            }
 
             if (selectedDate < currentDate)
             {
@@ -83,6 +92,7 @@ namespace Reservator.Controllers
 
         private bool SessionExists(string date)
         {
+            
             return _context.Sessions.Any(e => e.Date == date);
         }
 
