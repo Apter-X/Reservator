@@ -12,7 +12,7 @@ namespace Reservator.Models
         public int SessionID { get; set; }
 
         [Required]
-        public string DateID { get; set; }
+        public string Date { get; set; }
 
         //Navigation property
         

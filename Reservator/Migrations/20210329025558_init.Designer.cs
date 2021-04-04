@@ -196,7 +196,7 @@ namespace Reservator.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("DateID")
+                    b.Property<string>("Date")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

@@ -31,6 +31,10 @@ namespace Reservator
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+        /*    services.AddDefaultIdentity<UserInfo>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
+                    .AddEntityFrameworkStores<ApplicationDbContext>();*/
+                
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

@@ -26,6 +26,26 @@ namespace Reservator.Controllers
         }
 
         // GET: AdminPanel/Sessions/Details/5
+        public async Task<IActionResult> Result()
+        {
+            
+            DateTime currentDate = DateTime.Today;
+
+            string date = currentDate.ToString("yyyy-MM-dd");
+
+            var session = await _context.Sessions
+                .Include(a => a.Reservations.Where(r => r.Statement == "Confirmed"))
+                .ThenInclude(u => u.UserInfo)
+                .FirstOrDefaultAsync(m => m.Date == date);
+
+
+                
+
+            return View(session);
+        }
+
+
+        // GET: AdminPanel/Sessions/Details/5
         public async Task<IActionResult> Details(string date)
         {
             DateTime selectedDate = DateTime.Parse(date);
@@ -39,25 +59,41 @@ namespace Reservator.Controllers
             {
                 var s = new Session
                 {
-                    DateID = date
+                    Date = date
                 };
 
                 _context.Add(s);
                 await _context.SaveChangesAsync();
             }
 
+            
+
             var session = await _context.Sessions
                 .Include(a => a.Reservations.OrderByDescending(s => s.Score))
                 .ThenInclude(u => u.UserInfo)
-                .FirstOrDefaultAsync(m => m.DateID == date);
+                .FirstOrDefaultAsync(m => m.Date == date);
             
 
             return View(session);
         }
 
+
+
+
         private bool SessionExists(string date)
         {
-            return _context.Sessions.Any(e => e.DateID == date);
+            return _context.Sessions.Any(e => e.Date == date);
         }
+
+  /*      private bool SResultExists(string date)
+        {
+            return _context.Sessions
+                .Include(a => a.Reservations.Where(r => r.Statement == "Confirmed"))
+                .ThenInclude(u => u.UserInfo)
+                .FirstOrDefaultAsync(m => m.Date == date);
+        }*/
+
+
+
     }
 }

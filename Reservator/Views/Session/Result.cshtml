@@ -1,0 +1,67 @@
+﻿@model Reservator.Models.Session
+
+@{
+    ViewData["Title"] = "Result";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (Model.Reservations.Count() > 0)
+{
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+        </dl>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Score</th>
+                    <th>Statement</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int Rank = 0;
+
+                    foreach (var item in Model.Reservations)
+                    {
+                        Rank += 1;
+                        string Name = item.UserInfo.FirstName + " " + item.UserInfo.LastName;
+
+                        <tr>
+                            <td>@Rank</td>
+                            <td>@Name</td>
+                            <td>@Html.DisplayFor(modelItem => item.Score)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Statement)</td>
+                        </tr>
+                    }
+
+
+}
+            </tbody>
+        </table>
+    </div>
+            }
+            else
+            {
+<h1>The result will be shown after 4:45PM!</h1>
+            }
+ 
+
+
+
+
+
+<div>
+    <a asp-action="Index">Return to Index</a>
+</div>

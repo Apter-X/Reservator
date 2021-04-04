@@ -14,7 +14,7 @@
                     <img src="~/img/calendar.svg" width="24" height="24" viewBox="0 0 24 24">
                 </div>
 
-                <input type="date" name="date" asp-for="DateID" value="@DateTime.Today.ToString("yyyy-MM-dd")" id="search" class="form-control" required />
+                <input type="date" name="date" asp-for="Date" value="@DateTime.Today.ToString("yyyy-MM-dd")" id="search" class="form-control" required />
             </div>
             <div class="input-field second-wrap">
                 <input type="submit" value="Check availability" class="btn-search">

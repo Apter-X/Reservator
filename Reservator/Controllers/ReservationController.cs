@@ -32,20 +32,29 @@ namespace Reservator.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var check = _context.Reservations.Where(c => c.UsrID == userId).Where(d => d.SessID == id );
+            /*var check = _context.Reservations.Where(c => c.UsrID == userId).Where(d => d.SessID == id);
+
 
             if (check.Count() != 0)
             {
                 return View("Exist");
-            }
+            }*/
 
-            var rand = new Random();
 
-            int rank = Ranker(rand.Next(10, 60), rand.Next(5, 30));
+
+            /*var rand = new Random();
+
+            int rank = Ranker(rand.Next(10, 60), rand.Next(5, 30));*/
+
+            int resRefused = _context.Reservations.Where(c => c.UsrID == userId).Where(r => r.Statement == "Refused").Count();
+            int resAccepted = _context.Reservations.Where(c => c.UsrID == userId).Where(r => r.Statement == "Confirmed").Count();
+            int resTottal = _context.Reservations.Where(c => c.UsrID == userId).Count();
+
+
 
             var s = new Reservation
             {
-                Score = rank,
+                Score = Ranker(resRefused, resAccepted, resTottal),
                 SessID = id,
                 UsrID = userId,
                 Statement = "InProgress" // Default Value
@@ -62,11 +71,11 @@ namespace Reservator.Controllers
             return View();
         }
 
-        private int Ranker(int resRefused, int resAccepted)
+        private int Ranker(int resRefused, int resAccepted, int resTottal)
         {
             int rank = 30;
 
-            rank += (resRefused * 10) - (resAccepted * 5);
+            rank += ((resRefused * 10) - (resAccepted * 5)) - resTottal;
 
             return rank;
         }

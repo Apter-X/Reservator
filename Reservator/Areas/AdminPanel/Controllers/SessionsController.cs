@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -57,9 +57,10 @@ namespace Reservator.Areas.AdminPanel.Controllers
         // POST: AdminPanel/Sessions/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SessionID,DateID")] Session session)
+        public async Task<IActionResult> Create([Bind("SessionID,Date")] Session session)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +92,7 @@ namespace Reservator.Areas.AdminPanel.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SessionID,DateID")] Session session)
+        public async Task<IActionResult> Edit(int id, [Bind("SessionID,Date")] Session session)
         {
             if (id != session.SessionID)
             {

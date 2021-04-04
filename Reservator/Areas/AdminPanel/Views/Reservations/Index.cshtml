@@ -47,7 +47,7 @@
                         <td>@Name</td>
                         <td>@Html.DisplayFor(modelItem => item.Score)</td>
                         <td>@Html.DisplayFor(modelItem => item.Statement)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Session.DateID)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Session.Date)</td>
                         <td>
                             <a asp-action="Edit" asp-route-id="@item.ReservationId">Edit</a> |
                             <a asp-action="Details" asp-route-id="@item.ReservationId">Details</a> |

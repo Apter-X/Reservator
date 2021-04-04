@@ -19,13 +19,13 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>@Html.DisplayNameFor(model => model.DateID)</th>
+                        <th>@Html.DisplayNameFor(model => model.Date)</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>@Html.DisplayNameFor(model => model.DateID)</th>
+                        <th>@Html.DisplayNameFor(model => model.Date)</th>
                         <th>Actions</th>
                     </tr>
                 </tfoot>
@@ -33,7 +33,7 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>@Html.DisplayFor(modelItem => item.DateID)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Date)</td>
                             <td>
                                 <a asp-action="Edit" asp-route-id="@item.SessionID">Edit</a> |
                                 <a asp-action="Details" asp-route-id="@item.SessionID">Details</a> |
