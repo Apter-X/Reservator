@@ -39,15 +39,82 @@ namespace Reservator.Areas.AdminPanel.Controllers
             var session = await _context.Sessions
                 .Include(a => a.Reservations)
                 .ThenInclude(u => u.UserInfo)
+                
                 .FirstOrDefaultAsync(m => m.SessionID == id);
             if (session == null)
             {
                 return NotFound();
             }
-
-            return View(session);
+            
+            return View(session) ;
         }
+        public async Task<IActionResult> List(int? id)
+        {
 
+
+
+
+            int counter = 0;
+            int count = _context.Reservations
+                                      .Where(r => r.SessID == id).Count();
+            while (counter < count)
+            {
+                if (counter < 30)
+                {
+                    var res = _context.Reservations
+                                       .Where(r => r.Statement == "InProgress")
+                                      .Where(r => r.SessID == id).OrderByDescending(s => s.Score).First();
+                    res.Statement = "Confirmed";
+                   
+
+                    counter++;
+                }
+                else
+                {
+                    var res = _context.Reservations
+                          .Where(r => r.Statement == "InProgress")
+          .Where(r => r.SessID == 17).First();
+                    res.Statement = "Refused";
+                    counter++;
+                }
+                _context.SaveChanges();
+                
+            }
+            
+
+
+
+
+
+
+            /*   var session = _context.Sessions.Where(s => s.Date == date)
+                  .Include(a => a.Reservations.Where(r => r.Statement == "Confirmed"))
+                  .ThenInclude(u => u.UserInfo).ToList();*/
+
+
+            /*  .(y =>
+               {
+                   y.Statement = "Refused";
+
+               });*/
+
+            /*var reservetions = await _context.Reservations
+                                             .FirstOrDefaultAsync(m => m.SessID == id);
+
+
+
+            if (reservetions != null)
+            {
+                foreach(var res in reservetions)
+                {
+                    reservetions.Statement = "Confirmed";
+                    _context.SaveChanges();
+                }
+                
+            }*/
+
+            return View();
+        }
         // GET: AdminPanel/Sessions/Create
         public IActionResult Create()
         {

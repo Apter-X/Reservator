@@ -34,8 +34,9 @@ namespace Reservator.Controllers
             string date = currentDate.ToString("yyyy-MM-dd");
 
             var session = await _context.Sessions
-                .Include(a => a.Reservations.Where(r => r.Statement == "Confirmed"))
+                .Include(a => a.Reservations.Where(r => r.Statement == "Confirmed").OrderByDescending(s => s.Score))
                 .ThenInclude(u => u.UserInfo)
+                
                 .FirstOrDefaultAsync(m => m.Date == date);
 
 
@@ -85,7 +86,7 @@ namespace Reservator.Controllers
             return _context.Sessions.Any(e => e.Date == date);
         }
 
-  /*      private bool SResultExists(string date)
+  /*      private bool ResultExists(string date)
         {
             return _context.Sessions
                 .Include(a => a.Reservations.Where(r => r.Statement == "Confirmed"))
