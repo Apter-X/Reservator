@@ -35,19 +35,69 @@ namespace Reservator.Areas.AdminPanel.Controllers
             {
                 return NotFound();
             }
+           
 
             var session = await _context.Sessions
                 .Include(a => a.Reservations)
                 .ThenInclude(u => u.UserInfo)
+                
                 .FirstOrDefaultAsync(m => m.SessionID == id);
             if (session == null)
             {
                 return NotFound();
             }
-
-            return View(session);
+            
+            return View(session) ;
         }
+        public async Task<IActionResult> List(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var session = await _context.Sessions
+              .Include(a => a.Reservations)
+              .ThenInclude(u => u.UserInfo)
+              .FirstOrDefaultAsync(m => m.SessionID == id);
 
+            int data = _context.Reservations
+                   .Where(r => r.Statement == "InProgress")
+                   .Where(r => r.SessID == id).Count();
+            if(data > 0)
+            {
+                int counter = 0;
+                int count = _context.Reservations
+                                          .Where(r => r.SessID == id).Count();
+                while (counter < count)
+                {
+                    if (counter < 30)
+                    {
+                        var res = _context.Reservations
+                                           .Where(r => r.Statement == "InProgress")
+                                          .Where(r => r.SessID == id).OrderByDescending(s => s.Score).First();
+                        res.Statement = "Confirmed";
+
+
+                        counter++;
+                    }
+                    else
+                    {
+                        var res = _context.Reservations
+                              .Where(r => r.Statement == "InProgress")
+              .Where(r => r.SessID == id).First();
+                        res.Statement = "Refused";
+                        counter++;
+                    }
+                    _context.SaveChanges();
+
+                }
+
+
+                return View("Details", session);
+            }
+            return View("Details",session);
+
+        }
         // GET: AdminPanel/Sessions/Create
         public IActionResult Create()
         {

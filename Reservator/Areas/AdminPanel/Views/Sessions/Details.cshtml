@@ -26,7 +26,9 @@
     </div>
     <div class="card-body">
         <div class="mb-4 btn btn-primary">
-            <a class="text-white" asp-action="Create">Create New</a>
+
+           <a class="text-white" asp-action="List" icon="lock" asp-route-id="@Model.SessionID"> Lock</a>
+
         </div>
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
