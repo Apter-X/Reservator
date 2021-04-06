@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using MimeKit;
 using Reservator.Data;
 using Reservator.Models;
 
@@ -77,6 +79,22 @@ namespace Reservator.Areas.AdminPanel.Controllers
                                           .Where(r => r.SessID == id).OrderByDescending(s => s.Score).First();
                         res.Statement = "Confirmed";
 
+                        //send confirmation message
+                        var message = new MimeMessage();
+                        message.From.Add(new MailboxAddress("TEst Project", "aeljelladi@gmail.com"));
+                        message.To.Add(new MailboxAddress("maren", "ayoubetnizar@gmail.com"));
+                        message.Subject = "test mail in asp.net core";
+                        message.Body = new TextPart("plain")
+                        {
+                            Text = "yaaaah khadmat"
+                        };
+                        using(var client = new SmtpClient())
+                        {
+                            client.Connect("smtp.gmail.com", 587, false);
+                            client.Authenticate("aeljelladi@gmail.com", "ayoub_1995");
+                            client.Send(message);
+                            client.Disconnect(true);
+                        }
 
                         counter++;
                     }
