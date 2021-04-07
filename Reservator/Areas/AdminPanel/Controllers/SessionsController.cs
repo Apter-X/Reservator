@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EmailService;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,10 +19,11 @@ namespace Reservator.Areas.AdminPanel.Controllers
     public class SessionsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public SessionsController(ApplicationDbContext context)
+        private readonly IEmailSender _emailSender;
+        public SessionsController(ApplicationDbContext context, IEmailSender emailSender)
         {
             _context = context;
+            _emailSender = emailSender;
         }
 
         // GET: AdminPanel/Sessions
@@ -74,36 +76,28 @@ namespace Reservator.Areas.AdminPanel.Controllers
                 {
                     if (counter < 30)
                     {
+                    
+                        //Picking By High score 
                         var res = _context.Reservations
                                            .Where(r => r.Statement == "InProgress")
                                           .Where(r => r.SessID == id).OrderByDescending(s => s.Score).First();
                         res.Statement = "Confirmed";
 
-                        //send confirmation message
-                        var message = new MimeMessage();
-                        message.From.Add(new MailboxAddress("TEst Project", "aeljelladi@gmail.com"));
-                        message.To.Add(new MailboxAddress("maren", "ayoubetnizar@gmail.com"));
-                        message.Subject = "test mail in asp.net core";
-                        message.Body = new TextPart("plain")
-                        {
-                            Text = "yaaaah khadmat"
-                        };
-                        using(var client = new SmtpClient())
-                        {
-                            client.Connect("smtp.gmail.com", 587, false);
-                            client.Authenticate("aeljelladi@gmail.com", "ayoub_1995");
-                            client.Send(message);
-                            client.Disconnect(true);
-                        }
-
+                   
+                        var message = new Message(new string[] { res.UserInfo.Email }, "test email", "this is the content from our mail");
+                        _emailSender.SendEmail(message);
                         counter++;
                     }
                     else
                     {
+                
                         var res = _context.Reservations
-                              .Where(r => r.Statement == "InProgress")
-              .Where(r => r.SessID == id).First();
+                                .Where(r => r.Statement == "InProgress")
+                                .Where(r => r.SessID == id).First();
                         res.Statement = "Refused";
+
+                        var message = new Message(new string[] { res.UserInfo.Email }, "Test email", "Sorry good luck next time");
+                        _emailSender.SendEmail(message);
                         counter++;
                     }
                     _context.SaveChanges();

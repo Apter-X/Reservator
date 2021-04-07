@@ -1,7 +1,9 @@
+using EmailService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,10 +33,17 @@ namespace Reservator
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-        /*    services.AddDefaultIdentity<UserInfo>(options => options.SignIn.RequireConfirmedAccount = false)
-                .AddRoles<IdentityRole>()
-                    .AddEntityFrameworkStores<ApplicationDbContext>();*/
-                
+                services.AddDefaultIdentity<UserInfo>(options => options.SignIn.RequireConfirmedAccount = true)
+                    .AddRoles<IdentityRole>()
+                        .AddEntityFrameworkStores<ApplicationDbContext>()
+                        .AddDefaultTokenProviders();
+
+
+            var emailConfig = Configuration
+                    .GetSection("EmailConfiguration")
+                    .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
+            services.AddScoped<IEmailSender, EmailSender>();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
