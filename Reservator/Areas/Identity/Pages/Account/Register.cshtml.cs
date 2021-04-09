@@ -61,7 +61,8 @@ namespace Reservator.Areas.Identity.Pages.Account
             public string LastName { get; set; }
 
             [Required]
-            [EmailAddress]
+            [StringLength(100, ErrorMessage = "YouCode Alais required")]
+            [Email]
             [Display(Name = "Email")]
             public string Email { get; set; }
 

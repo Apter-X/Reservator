@@ -27,12 +27,23 @@ a {
 .body-container {
     min-height: 80% !important;
 }
-
+.header-container {
+    min-height: 10% !important;
+}
+.footer-container {
+    min-height: 10% !important;
+    display: flex !important;
+}
+.footer-flex{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+}
 /* 
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
