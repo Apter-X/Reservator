@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EmailService;
+using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using MimeKit;
 using Reservator.Data;
 using Reservator.Models;
 
@@ -16,10 +19,11 @@ namespace Reservator.Areas.AdminPanel.Controllers
     public class SessionsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public SessionsController(ApplicationDbContext context)
+        private readonly IEmailSender _emailSender;
+        public SessionsController(ApplicationDbContext context, IEmailSender emailSender)
         {
             _context = context;
+            _emailSender = emailSender;
         }
 
         // GET: AdminPanel/Sessions
@@ -72,20 +76,28 @@ namespace Reservator.Areas.AdminPanel.Controllers
                 {
                     if (counter < 30)
                     {
+                    
+                        //Picking By High score 
                         var res = _context.Reservations
                                            .Where(r => r.Statement == "InProgress")
                                           .Where(r => r.SessID == id).OrderByDescending(s => s.Score).First();
                         res.Statement = "Confirmed";
 
-
+                   
+                        var message = new Message(new string[] { res.UserInfo.Email }, "test email", "this is the content from our mail");
+                        _emailSender.SendEmail(message);
                         counter++;
                     }
                     else
                     {
+                
                         var res = _context.Reservations
-                              .Where(r => r.Statement == "InProgress")
-              .Where(r => r.SessID == id).First();
+                                .Where(r => r.Statement == "InProgress")
+                                .Where(r => r.SessID == id).First();
                         res.Statement = "Refused";
+
+                        var message = new Message(new string[] { res.UserInfo.Email }, "Test email", "Sorry good luck next time");
+                        _emailSender.SendEmail(message);
                         counter++;
                     }
                     _context.SaveChanges();

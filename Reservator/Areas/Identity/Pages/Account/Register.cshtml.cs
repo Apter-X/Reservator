@@ -6,11 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using EmailService;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
@@ -60,7 +61,8 @@ namespace Reservator.Areas.Identity.Pages.Account
             public string LastName { get; set; }
 
             [Required]
-            [EmailAddress]
+            [StringLength(100, ErrorMessage = "YouCode Alais required")]
+            [Email]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
@@ -95,6 +97,7 @@ namespace Reservator.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
@@ -128,8 +131,8 @@ namespace Reservator.Areas.Identity.Pages.Account
 
 
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    var message = new Message(new string[] { Input.Email }, "Confirm your email", $"Please confirm your account by clicking in this link {callbackUrl}.");
+                    _emailSender.SendEmail(message);
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

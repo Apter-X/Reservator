@@ -30,7 +30,7 @@ namespace Reservator.Controllers
 
         public async Task<IActionResult> Create(int id)
         {
-            if (id == null || id == 0)
+            if (id == 0)
             {
                 return NotFound();
             }
@@ -44,11 +44,6 @@ namespace Reservator.Controllers
                 return View("Exist");
             }
 
-
-
-            /*var rand = new Random();
-
-            int rank = Ranker(rand.Next(10, 60), rand.Next(5, 30));*/
 
             int resRefused = _context.Reservations.Where(c => c.UsrID == userId).Where(r => r.Statement == "Refused").Count();
             int resAccepted = _context.Reservations.Where(c => c.UsrID == userId).Where(r => r.Statement == "Confirmed").Count();
