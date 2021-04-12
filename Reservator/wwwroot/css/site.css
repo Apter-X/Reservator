@@ -27,14 +27,14 @@ a {
 .body-container {
     min-height: 80% !important;
 }
-.header-container {
+#header-container {
     min-height: 10% !important;
 }
-.footer-container {
+#footer-container {
     min-height: 10% !important;
     display: flex !important;
 }
-.footer-flex{
+#footer-flex{
     display:flex !important;
     align-items:center !important;
     justify-content:center !important;
